@@ -1,0 +1,35 @@
+body {
+    background-color: #b9efff;
+  }
+  h1 {
+    text-align: center;
+  }
+  .calculator {
+    border-style: solid;
+    border-color: black;
+    background-color: #5468ff;
+    width: 28%;
+    height: 500px;
+    margin-left: 35%;
+    text-align: center;
+    #display-box {
+      margin-top: 5%;
+      display: inline-block;
+      text-align: center;
+      width: 90%;
+      height: 12%;
+      background-color: #f5f5fa;
+      border-style: none;
+    }
+    #keys {
+      height: 100%;
+    }
+  }
+  button {
+    height: 16%;
+    width: 22%;
+  }
+  .special-button {
+    width: 45%;
+  }
+  
