@@ -1,5 +1,7 @@
 var displayValue = "";
+var calculationArray = [];
 populate();
+clear();
 function operate(num1,num2,operator){
     if(operator == '+'){
         return (num1 + num2);
@@ -24,7 +26,6 @@ function populate(){// allow it to enter multiple numbers
     for(let i = 0; i < blocks.length; i++){
         blocks[i].addEventListener("click", function(){
             if((blocks[i]).classList.contains("operation")){
-                
             }
             else{
                 displayValue += blocks[i].innerHTML;
@@ -33,4 +34,15 @@ function populate(){// allow it to enter multiple numbers
             }
         })
     }
+}
+
+function clear(){
+    const clear = document.getElementById("clear");
+    const displayBox = document.getElementById("display-box");
+
+    clear.addEventListener("click",function(){
+        console.log("here");
+        displayBox.innerText = "";
+    })
+
 }
