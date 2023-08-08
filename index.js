@@ -1,7 +1,7 @@
 var displayValue = "";
 var calcArray = [];
 populate();
-clear();
+//clear();
 operation();
 getAnswer();
 function operate(num1,num2,operator){
@@ -35,11 +35,13 @@ function populate(){// allow it to enter multiple numbers
 function clear(){
     const clear = document.getElementById("clear");
     const displayBox = document.getElementById("display-box");
+    
     console.log("here");
     displayBox.innerText = "";
     displayValue = ""
 
     clear.addEventListener("click",function(){
+        calcArray = [];
         console.log("here");
         displayBox.innerText = "";
         displayValue = ""
@@ -60,41 +62,28 @@ function operation(){
     }
 }
 
-function getAnswer(){// not finished
+function getAnswer() {
     const equal = document.getElementById("equalBtn");
-    const operators = ["+","-","/","x"];
-    equal.addEventListener('click',function(){
-        numOfLoop = calcArray.length/3;
-        let firstN = 0;
-        let operator = 1;
-        let secondN = 2;
-        let total = 0;
+    const displayBox = document.getElementById("display-box");
+
+    equal.addEventListener('click', function() {
         calcArray.push(displayValue);
         displayValue = "";
-        
-        if(((calcArray.length % 3) == 0)){
+       // clear();
 
-           // clear();
-            for(let k = 0; k < numOfLoop; k++){
-                total = total + operate(calcArray[firstN],calcArray[secondN], calcArray[operator]);
-                console.log(total);
-                firstN += 3;
-                operator += 3;
-                secondN += 3;
-               // calcArray[firstN] = total;
+        let total = parseFloat(calcArray[0]); 
 
-            }
-            console.log("we here");
-            console.log(calcArray);
-            console.log(total);
-        }
-        else{
+        for (let k = 1; k < (calcArray.length ); k += 2) {
+            console.log("within calculation array");
+            let operator = calcArray[k];
+            let operand = parseFloat(calcArray[k + 1]) ;
             
-            console.log("invalid");
-            console.log(calcArray);
+            total = operate(total, operand, operator);
         }
 
+        displayBox.innerText = total;
 
-
-    })
+        console.log(calcArray);
+        console.log("Final Total:", total);
+    });
 }
