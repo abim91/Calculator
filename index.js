@@ -1,9 +1,10 @@
 var displayValue = "";
 var calcArray = [];
+const displayBox = document.getElementById("display-box");
 populate();
 //clear();
 operation();
-getAnswer();
+
 function operate(num1,num2,operator){
     if(operator == '+'){
         return (num1 + num2);
@@ -51,27 +52,33 @@ function clear(){
 
 function operation(){
     const operations = document.getElementsByClassName("operation");
+    
     for(let j =0; j < operations.length; j++){
         operations[j].addEventListener('click',function(){
-            
-            if(displayValue != "") calcArray.push(displayValue);
-            calcArray.push(operations[j].innerHTML);
-            clear();
-            console.log(calcArray);
+            if(calcArray.length >= 2){
+                if(displayValue != "") calcArray.push(displayValue);
+                clear();
+                getAnswer();
+                console.log("it pops now");
+                calcArray.push(operations[j].innerHTML);
+            } 
+            else{
+                if(displayValue != "") calcArray.push(displayValue);
+                calcArray.push(operations[j].innerHTML);
+                clear();
+            }
+           
         })
     }
 }
 
+
+
 function getAnswer() {
-    const equal = document.getElementById("equalBtn");
-    const displayBox = document.getElementById("display-box");
-
-    equal.addEventListener('click', function() {
-        calcArray.push(displayValue);
+    
+    const displayBox = document.getElementById("display-box");        
         displayValue = "";
-       // clear();
-
-        let total = parseFloat(calcArray[0]); 
+       let total = parseFloat(calcArray[0]); 
 
         for (let k = 1; k < (calcArray.length ); k += 2) {
             console.log("within calculation array");
@@ -85,5 +92,17 @@ function getAnswer() {
 
         console.log(calcArray);
         console.log("Final Total:", total);
-    });
 }
+
+const equal = document.getElementById("equalBtn");
+equal.addEventListener('click', function(){
+    if(((calcArray.length % 2) != 0) || (calcArray.length) == 0 ){
+        clear();
+        displayBox.innerHTML = "ERROR";
+
+    }
+    else{
+        calcArray.push(displayValue);
+        getAnswer();
+    }
+});
