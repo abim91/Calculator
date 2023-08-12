@@ -2,10 +2,15 @@ var displayValue = "";
 var calcArray = [];
 const displayBox = document.getElementById("display-box");
 populate();
-//clear();
+
 operation();
 
 function operate(num1,num2,operator){
+    if(num2 == 0 && operator == '/'){
+        alert("Sorry our ice cream machine is broken.");
+        return;
+    }
+        
     if(operator == '+'){
         return (num1 + num2);
     }
@@ -34,19 +39,9 @@ function populate(){// allow it to enter multiple numbers
 }
 
 function clear(){
-    const clear = document.getElementById("clear");
-    const displayBox = document.getElementById("display-box");
-    
     console.log("here");
     displayBox.innerText = "";
     displayValue = ""
-
-    clear.addEventListener("click",function(){
-        calcArray = [];
-        console.log("here");
-        displayBox.innerText = "";
-        displayValue = ""
-    })
 
 }
 
@@ -86,6 +81,10 @@ function getAnswer() {
             let operand = parseFloat(calcArray[k + 1]) ;
             
             total = operate(total, operand, operator);
+            if(total == 'undefined'){
+                total = '';
+            }
+                
         }
 
         displayBox.innerText = total;
@@ -98,7 +97,7 @@ const equal = document.getElementById("equalBtn");
 equal.addEventListener('click', function(){
     if(((calcArray.length % 2) != 0) || (calcArray.length) == 0 ){
         clear();
-        displayBox.innerHTML = "ERROR";
+       // displayBox.innerHTML = "ERROR";
 
     }
     else{
@@ -106,3 +105,10 @@ equal.addEventListener('click', function(){
         getAnswer();
     }
 });
+
+
+const clearBtn = document.getElementById("clear");
+clearBtn.addEventListener("click",function(){
+    calcArray = [];
+    clear();
+})
