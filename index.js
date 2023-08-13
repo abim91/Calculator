@@ -106,7 +106,11 @@ equal.addEventListener('click', function(){
     }
 });
 
-
+const deleteBtn = document.getElementById("delete");
+deleteBtn.addEventListener("click",function(){
+        displayValue = displayValue.slice(0,(displayValue.length-1));
+        displayBox.innerText = displayValue;
+})
 const clearBtn = document.getElementById("clear");
 clearBtn.addEventListener("click",function(){
     calcArray = [];
